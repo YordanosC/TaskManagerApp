@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskManagerApp.Views.AddTaskPage"
+             Title="Add Task">
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="12" Spacing="10">
+                <Entry Placeholder="Task title" Text="{Binding Title}" />
+                <DatePicker Date="{Binding DueDate}" />
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Completed" VerticalOptions="Center"/>
+                    <Switch IsToggled="{Binding IsCompleted}" />
+                </HorizontalStackLayout>
+
+                <Button Text="Save" Command="{Binding SaveCommand}" />
+                <Button Text="Cancel" Clicked="OnCancelClicked" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
