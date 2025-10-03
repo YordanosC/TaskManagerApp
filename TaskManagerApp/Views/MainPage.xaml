@@ -2,27 +2,75 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaskManagerApp.Views.MainPage"
-             Title="Tasks">
-    <ContentPage.Content>
-        <VerticalStackLayout Padding="12" Spacing="12">
-            <Label Text="{Binding Quote}" LineBreakMode="WordWrap"/>
-            <Button Text="Fetch Quote" Command="{Binding FetchQuoteCommand}" />
+             Title="Tasks"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="15" Spacing="15">
+
+            <!-- Motivational Quote -->
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   CornerRadius="10"
+                   Padding="10"
+                   HasShadow="True">
+                <Label Text="{Binding Quote}"
+                       TextColor="{DynamicResource TextColor}"
+                       FontAttributes="Italic"
+                       FontSize="14"
+                       LineBreakMode="WordWrap" />
+            </Frame>
+
+            <!-- Fetch Quote Button -->
+            <Button Text="Fetch Quote"
+                    Command="{Binding FetchQuoteCommand}"
+                    Style="{DynamicResource PrimaryButtonStyle}" />
+
+            <!-- Task List -->
             <CollectionView ItemsSource="{Binding Tasks}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10" Margin="0,6" CornerRadius="6" >
-                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                <Label Text="{Binding Title}" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                                <Label Text="{Binding DueDate, StringFormat='{0:MMM dd, yyyy}'}" Grid.Row="1" Grid.Column="0" />
-                                <Switch IsToggled="{Binding IsCompleted}" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" />
+                        <Frame Padding="12"
+                               Margin="0,6"
+                               CornerRadius="10"
+                               HasShadow="True"
+                               BackgroundColor="{DynamicResource CardBackgroundColor}">
+
+                            <Grid ColumnDefinitions="*,Auto"
+                                  RowDefinitions="Auto,Auto"
+                                  RowSpacing="5">
+
+                                <!-- Title -->
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="{DynamicResource TextColor}" />
+
+                                <!-- Completed Toggle -->
+                                <Switch Grid.Row="0"
+                                        Grid.Column="1"
+                                        IsToggled="{Binding IsCompleted}"
+                                        VerticalOptions="Center" />
+
+                                <!-- Due Date -->
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Text="{Binding DueDate, StringFormat='Due: {0:MMM dd, yyyy}'}"
+                                       FontSize="13"
+                                       TextColor="{DynamicResource SecondaryTextColor}" />
                             </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Add Task" Clicked="OnAddTaskClicked" />
+            <!-- Add Task Button -->
+            <Button Text="Add Task"
+                    Clicked="OnAddTaskClicked"
+                    Style="{DynamicResource PrimaryButtonStyle}" />
+
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>
