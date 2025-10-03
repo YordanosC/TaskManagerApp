@@ -42,4 +42,50 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+
+    <!-- THEME-AWARE BRUSHES -->
+
+    <!-- Page Background -->
+    <SolidColorBrush x:Key="PageBackgroundColor">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="{StaticResource White}" Dark="{StaticResource Gray950}" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <!-- Card Background (e.g., frames) -->
+    <SolidColorBrush x:Key="CardBackgroundColor">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="{StaticResource Gray100}" Dark="{StaticResource Gray900}" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <!-- Primary Text -->
+    <SolidColorBrush x:Key="TextColor">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="{StaticResource Black}" Dark="{StaticResource White}" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <!-- Secondary Text -->
+    <SolidColorBrush x:Key="SecondaryTextColor">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="{StaticResource Gray500}" Dark="{StaticResource Gray300}" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <!-- Buttons -->
+    <SolidColorBrush x:Key="PrimaryButtonBackground">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="{StaticResource Primary}" Dark="{StaticResource PrimaryDark}" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <SolidColorBrush x:Key="PrimaryButtonTextColor">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="{StaticResource White}" Dark="{StaticResource Black}" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+
 </ResourceDictionary>

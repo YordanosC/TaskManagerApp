@@ -10,6 +10,8 @@ public partial class MainPage : ContentPage
     public MainPage( MainViewModel viewModel)
 	{
 		InitializeComponent();
+        // Initialize switch based on current theme
+        ThemeSwitch.IsToggled = Application.Current.RequestedTheme == AppTheme.Dark;
         _viewModel = viewModel;
         BindingContext = _viewModel;
     }
@@ -34,9 +36,24 @@ public partial class MainPage : ContentPage
             }
         }
 
-        // fallback (shouldn't usually happen)
         await Navigation.PushAsync(new AddTaskPage(new AddTaskViewModel(ServiceProviderHolder.ServiceProvider.GetService<TaskManagerApp.Services.ITaskService>())));
+
     }
 
+    private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e)
+    {
+        if (e.Value)
+        {
+            // Dark Mode
+            Application.Current.UserAppTheme = AppTheme.Dark;
+        }
+        else
+        {
+            // Light Mode
+            Application.Current.UserAppTheme = AppTheme.Light;
+        }
+    }
 
 }
+
+

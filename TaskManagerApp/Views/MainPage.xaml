@@ -5,10 +5,28 @@
              Title="Tasks"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-    <ContentPage.Content>
-        <VerticalStackLayout Padding="15" Spacing="15">
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="20"
+          RowSpacing="15">
 
-            <!-- Motivational Quote -->
+        <!--  HEADER -->
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+
+            <Label Text="Task Manager" 
+                   Style="{StaticResource Headline}" 
+                   HorizontalOptions="Center" />
+
+            <!--  Theme Toggle Switch -->
+            <HorizontalStackLayout HorizontalOptions="End">
+                <Label Text="" VerticalOptions="Center" />
+                <Switch x:Name="ThemeSwitch"
+                        Toggled="ThemeSwitch_Toggled"
+                        VerticalOptions="Center"
+                        Margin="5,0"/>
+                <Label Text="" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <!--  Motivational Quote -->
             <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
                    CornerRadius="10"
                    Padding="10"
@@ -20,12 +38,14 @@
                        LineBreakMode="WordWrap" />
             </Frame>
 
-            <!-- Fetch Quote Button -->
             <Button Text="Fetch Quote"
                     Command="{Binding FetchQuoteCommand}"
                     Style="{DynamicResource PrimaryButtonStyle}" />
 
-            <!-- Task List -->
+        </VerticalStackLayout>
+
+        <!--  TASK LIST (Scrollable) -->
+        <ScrollView Grid.Row="1">
             <CollectionView ItemsSource="{Binding Tasks}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -34,26 +54,19 @@
                                CornerRadius="10"
                                HasShadow="True"
                                BackgroundColor="{DynamicResource CardBackgroundColor}">
-
                             <Grid ColumnDefinitions="*,Auto"
                                   RowDefinitions="Auto,Auto"
                                   RowSpacing="5">
-
-                                <!-- Title -->
                                 <Label Grid.Row="0"
                                        Grid.Column="0"
                                        Text="{Binding Title}"
                                        FontAttributes="Bold"
                                        FontSize="16"
                                        TextColor="{DynamicResource TextColor}" />
-
-                                <!-- Completed Toggle -->
                                 <Switch Grid.Row="0"
                                         Grid.Column="1"
                                         IsToggled="{Binding IsCompleted}"
                                         VerticalOptions="Center" />
-
-                                <!-- Due Date -->
                                 <Label Grid.Row="1"
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2"
@@ -65,12 +78,13 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+        </ScrollView>
 
-            <!-- Add Task Button -->
-            <Button Text="Add Task"
-                    Clicked="OnAddTaskClicked"
-                    Style="{DynamicResource PrimaryButtonStyle}" />
-
-        </VerticalStackLayout>
-    </ContentPage.Content>
+        <!-- STICKY ADD TASK BUTTON -->
+        <Button Grid.Row="2"
+                Text="Add Task"
+                Clicked="OnAddTaskClicked"
+                Style="{DynamicResource PrimaryButtonStyle}"
+                Margin="0,10,0,0" />
+    </Grid>
 </ContentPage>
